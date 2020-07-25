@@ -38,20 +38,45 @@ function jump(){
     },300);
 }
 
-var offset=0;
+character.addEventListener("click", function() {
+    block.style.animationPlayState="running";
+})
+
+var offset=0;           // for positioning of character
+var distance=50;        // distance between blocks when message appears
+var endGame = false;    // determines whether to end game
+
 var checkDead = setInterval(function() {
-    // console.log(window.getComputedStyle(character));
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
     let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-    console.log(blockLeft);
-
+    let popUp = document.getElementById("notes-to-play");
+    
     if(ingame) {
+        if(/*(blockLeft<offset && blockLeft>-20 && characterTop>=130) ||*/ endGame){
+            block.style.animation = "none";
+            alert("Game Over. score: "+Math.floor(counter/100));
+            counter=0;
+            character.classList.remove("animate");
+            ingame = false;
+        } 
+        else if(blockLeft<offset+distance) {
+            rightPressed=false;
+            block.style.animationPlayState="paused";
+            popUp.style.display="block";    // pop-up message appears
+            popUp.style.marginLeft=blockLeft+"px";
+            // if (notes correct) --> block disappears, set rightPressed=true again
+            // if (notes wrong) --> endGame = true;
+        }
+        else{
+            counter++;
+            document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
+        }
+
         if(rightPressed) {
             character.style.left = offset+'px';
             offset += 1;
             characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-            console.log(characterWidth);
-            if(offset>700) {
+            if(offset>700) { // fix this number
                 offset=700;
             }
         }
@@ -62,22 +87,17 @@ var checkDead = setInterval(function() {
                 offset=0;
             }
         }
-
-        if(blockLeft<offset && blockLeft>-20 && characterTop>=130){
-            block.style.animation = "none";
-            alert("Game Over. score: "+Math.floor(counter/100));
-            counter=0;
-            character.classList.remove("animate");
-            concrete.innerHTML = "Play the right note to break out this musician!";
-            ingame = false;
-        }else{
-            counter++;
-            document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
-        }
+    }
+    else {
+        offset=0;
+        block.style.animation = "none";
+        concrete.innerHTML = "Play the right note to break out this musician!";
     }
 }, 10);
 
 function startgame() {
+    offset=0;
+    character.style.left="0px";
     ingame = true;
     block.style.animation = "block 2s infinite linear";
     concrete.innerHTML = "";
