@@ -27,6 +27,8 @@ function keyUpHandler(e) {
         leftPressed = false;
     }
 }
+var ingame = false;
+var concrete = document.getElementById("break-concrete");
 
 function jump(){
     if(character.classList == "animate"){return}
@@ -69,4 +71,25 @@ var checkDead = setInterval(function() {
         counter++;
         document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
     }
+
+    if(ingame) {
+        if(blockLeft<20 && blockLeft>-20 && characterTop>=130){
+            block.style.animation = "none";
+            // alert("Game Over. score: "+Math.floor(counter/100));
+            counter=0;
+            character.classList.remove("animate");
+            concrete.innerHTML = "Play the right note to break out this musician!";
+            ingame = false;
+        }else{
+            counter++;
+            document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
+        }
+    }
 }, 10);
+
+function startgame() {
+    ingame = true;
+    block.style.animation = "block 2s infinite linear";
+    concrete.innerHTML = "";
+    // character.classList.add("animate"); 
+}
