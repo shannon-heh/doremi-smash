@@ -200,3 +200,9 @@ body {
 .swal-button {
   background: #2c3e50;
 }
+
+#notes-to-play {
+  background-color: yellow;
+  display: none;
+  width: 100px;
+}

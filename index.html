@@ -11,7 +11,8 @@
     <div id="character"></div>
     <div id="block"></div>
     <button id="startgame" onclick="startgame()">Start</button>
-    <div id="break-concrete"></div>
+    <div id="target-note"></div>
+    <span id="notes-to-play">Play this note:<br></span>
   </div>
   <p>Score: <span id="scoreSpan"></span></p>
   <script src="script.js"></script>
@@ -23,7 +24,8 @@
 <div class="notes">
   <div class="notes-list"></div>
   <div class="frequency"> <span>Hz</span></div>
-</div> -->
+  <div id="current-note"></div>
+</div>
 <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 <script src="aubio.js"></script>
 <script src="tuner.js"></script>
