@@ -1,6 +1,8 @@
 var character = document.getElementById("character");
 var block = document.getElementById("block");
 var counter=0;
+var ingame = false;
+var targetnote = document.getElementById("target-note");
 
 var rightPressed = false;
 var leftPressed = false;
@@ -27,7 +29,7 @@ function keyUpHandler(e) {
         leftPressed = false;
     }
 }
-var ingame = false;
+
 var concrete = document.getElementById("break-concrete");
 
 function jump(){
@@ -38,9 +40,9 @@ function jump(){
     },300);
 }
 
-character.addEventListener("click", function() {
-    block.style.animationPlayState="running";
-})
+// character.addEventListener("click", function() {
+//     block.style.animationPlayState="running";
+// })
 
 var offset=0;           // for positioning of character
 var distance=50;        // distance between blocks when message appears
@@ -72,6 +74,7 @@ var checkDead = setInterval(function() {
             document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
         }
 
+        // for left and right movement
         if(rightPressed) {
             character.style.left = offset+'px';
             offset += 1;
@@ -91,11 +94,13 @@ var checkDead = setInterval(function() {
     else {
         offset=0;
         block.style.animation = "none";
+        popUp.style.display="none"; 
         concrete.innerHTML = "Play the right note to break out this musician!";
     }
 }, 10);
 
 function startgame() {
+    //reset parameters
     offset=0;
     character.style.left="0px";
     ingame = true;
