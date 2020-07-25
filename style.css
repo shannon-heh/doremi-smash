@@ -4,7 +4,7 @@
   overflow-x: hidden;
 }
 .game {
-  width: 800px;
+  width: 500px;
   height: 200px;
   border: 1px solid black;
   margin: auto;
@@ -25,7 +25,7 @@
   position: relative;
   top: 130px;
   left: 500px;
-  animation: block 1s infinite linear;
+  animation: none;
 }
 @keyframes block {
   0%{left: 500px}
