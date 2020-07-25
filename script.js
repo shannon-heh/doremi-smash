@@ -2,7 +2,7 @@ var character = document.getElementById("character");
 var block = document.getElementById("block");
 var counter=0;
 var ingame = false;
-var concrete = document.getElementById("break-concrete");
+var targetnote = document.getElementById("target-note");
 
 function jump(){
     if(character.classList == "animate"){return}
@@ -21,7 +21,8 @@ var checkDead = setInterval(function() {
             // alert("Game Over. score: "+Math.floor(counter/100));
             counter=0;
             character.classList.remove("animate");
-            concrete.innerHTML = "Play the right note to break out this musician!";
+            targetnote.innerHTML = "Play an A to break out this musician!";
+            
             ingame = false;
         }else{
             counter++;
