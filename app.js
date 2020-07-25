@@ -10,14 +10,12 @@ Application.prototype.start = function() {
   const self = this
 
   this.tuner.onNoteDetected = function(note) {
-    var randnote = note.name;
-    console.log(randnote);
-    console.log(note.name);
-    console.log(typeof note.name);
-    console.log(typeof randnote);
-    if (this.randNote === note.name) {
+    // var randnote = "A"; // TO DO MAKE THIS A RANDOM NOTE
+    var allNotes = ["A", "A#", "B", "C", "D", "D#", "E", "F", "F#", "G", "G#"]
+    var randnote = allNotes[Math.floor(Math.random() * allNotes.length)];
+    document.getElementById("target-note").innerHTML = "Play this note: " + randnote;
+    if (randnote===note.name) {
       console.log("hereeeeeee");
-      alert("You played the right note!");
     }
     else {
       console.log("noooooooo");
