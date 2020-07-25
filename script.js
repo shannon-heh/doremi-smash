@@ -43,6 +43,7 @@ var checkDead = setInterval(function() {
     // console.log(window.getComputedStyle(character));
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
     let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+    console.log(blockLeft);
 
     if(ingame) {
         if(rightPressed) {
@@ -52,7 +53,6 @@ var checkDead = setInterval(function() {
             console.log(characterWidth);
             if(offset>700) {
                 offset=700;
-                console.log(offset);
             }
         }
         if(leftPressed) {
@@ -63,7 +63,7 @@ var checkDead = setInterval(function() {
             }
         }
 
-        if(blockLeft<20 && blockLeft>-20 && characterTop>=130){
+        if(blockLeft<offset && blockLeft>-20 && characterTop>=130){
             block.style.animation = "none";
             alert("Game Over. score: "+Math.floor(counter/100));
             counter=0;
