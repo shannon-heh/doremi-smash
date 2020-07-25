@@ -16,7 +16,6 @@ Application.prototype.start = function() {
       } else {
         self.lastNote = note.name
       }
-      document.getElementsByClassName("note-played").innerHTML = self.lastNote
     }
   }
 
