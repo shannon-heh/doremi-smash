@@ -41,7 +41,9 @@ Application.prototype.start = function() {
     }
     isCorrectNote = (mynote == correctNote);
   }
-  swal("You're at a concert (with your instrument of choice, of course) when suddenly, it starts pouring concrete! By some miracle, there's no concrete on you. Alas, everyone else is stuck, including the musicians. But, the show must go on! To save the musicians, play notes to control your movements, all while playing the notes on each musician to break them out of their predicament. Be careful, though--if you wait too long, the concrete will harden and the musician will be trapped forever :(")
+  swal({title: "Welcome to BREAKING NOTES",
+  text: "You're at a concert (with your voice or instrument of choice, of course) when suddenly, it starts pouring concrete! By some miracle, there's no concrete on you. Alas, everyone else is stuck, including the musicians. But, the show must go on!\n\n To save the musicians, use your voice or instrument to play notes to control your movements, all while playing the notes on each musician to break them out of the concrete. Be careful, though--if you wait too long, the concrete will harden and the musician will be trapped forever!",
+  button: "Let's Play!"})
   .then(function() {
     self.tuner.init()
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount)
@@ -131,6 +133,7 @@ var checkDead = setInterval(function() {
           counter++;  // increase score when block destroyed
         }
         document.getElementById("scoreSpan").innerHTML = counter;
+
       }
     }else {
       block.style.animation = "none";
@@ -146,6 +149,7 @@ function startgame() {
     ingame = true;
     block.style.animation = "block 2s infinite linear";
     concrete.innerHTML = "";
+
     character.classList.add("animate"); 
     document.getElementById("gameover").innerHTML = "";
 }
