@@ -7,15 +7,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <p class="instructions"><b><u>Controls:</u></b> play a <b>C</b> to move <b>backwards</b>, an <b>E</b> to move <b>forwards</b>, and a <b>D</b> to <b>jump</b></p>
   <div class="game">
     <div id="timer"></div>
     <div id="character"></div>
     <div id="block"></div>
     <button id="startgame" onclick="startgame()">Start</button>
     <div id="gameover"></div>
+<<<<<<< HEAD
     <span id="notes-to-play">Play this note: <span id="correct-note"></span></span>
+=======
+    <div id="notes-to-play">Play this note: <span id="target-note"></span></div>
+>>>>>>> 12460e798a3c262db05509dcd313f66b9bfe905a
   </div>
-  <p class="score">Score: <span class="score" id="scoreSpan">0</span></p>
+  <p class="score"><b>Score: <span class="score" id="scoreSpan">0</span></b></p>
   <canvas class="frequency-bars"></canvas>
 <div class="meter">
   <div class="meter-dot"></div>

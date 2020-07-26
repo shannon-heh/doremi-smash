@@ -7,9 +7,10 @@ const Application = function() {
   this.frequencyBars = new FrequencyBars('.frequency-bars')
   this.update({ name: 'A', frequency: 440, octave: 4, value: 69, cents: 0 })
 }
-
 var isCorrectNote = false;
-const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+var correctNote = 'A';
+// const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+// var correctNote = notes[Math.floor(Math.random()*notes.length)];
 
 Application.prototype.start = function() {
   const self = this
@@ -40,7 +41,9 @@ Application.prototype.start = function() {
     }
     isCorrectNote = (mynote == correctNote);
   }
-  swal("You're at a concert (with your instrument of choice, of course) when suddenly, it starts pouring concrete! By some miracle, there's no concrete on you. Alas, everyone else is stuck, including the musicians. But, the show must go on! To save the musicians, play notes to control your movements, all while playing the notes on each musician to break them out of their predicament. Be careful, though--if you wait too long, the concrete will harden and the musician will be trapped forever :(")
+  swal({title: "Welcome to BREAKING NOTES",
+  text: "You're at a concert (with your voice or instrument of choice, of course) when suddenly, it starts pouring concrete! By some miracle, there's no concrete on you. Alas, everyone else is stuck, including the musicians. But, the show must go on!\n\n To save the musicians, use your voice or instrument to play notes to control your movements, all while playing the notes on each musician to break them out of the concrete. Be careful, though--if you wait too long, the concrete will harden and the musician will be trapped forever!",
+  button: "Let's Play!"})
   .then(function() {
     self.tuner.init()
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount)
@@ -79,90 +82,79 @@ function jump(){
     if(character.classList == "animate"){return}
     character.classList.add("animate");
     setTimeout(function(){
-      character.classList.remove("animate");
-    },3000);
+        character.classList.remove("animate");
+    },300);
 }
 function movL(){
   character.style.left = offset+'px';
-  offset -= 5;
-  if(offset<0) {
-      offset=0;
-  }
+        offset -= 10;
+        if(offset<0) {
+            offset=0;
+        }
 }
 function movR(){
   character.style.left = offset+'px';
-  offset += 5;
-  characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-  if(offset>700) {
-      offset=700;
-  }
-}
-function jumpL(){
-  character.style.left = offset+'px';
-  offset += 5;
-  characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-  if(offset>750) {
-      offset=750;
-  }
+        offset += 10;
+        characterWidth = window.getComputedStyle(character).getPropertyValue("width");
+        console.log(characterWidth);
+        if(offset>700) {
+            offset=700;
+            console.log(offset);
+        }
 }
 var offset=0;           // for positioning of character
 var distance=50;        // distance between blocks when message appears
 var myTimer;
 var correctNote = notes[Math.floor(Math.random()*notes.length)]; // note to play
-console.log(correctNote);
-
 
 var checkDead = setInterval(function() {
+    // console.log(window.getComputedStyle(character));
+    let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
+    let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+    
+    if(ingame) {
+      block.style.display="block";
+      block.style.animationPlayState="running";
+      popUp.style.display="none";
+      document.getElementById("startgame").style.visibility = "hidden";
+      document.getElementById("gameover").innerHTML="";
 
-  let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
-  let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-  
-  if(ingame) {
-    block.style.display="block";
-    block.style.animationPlayState="running";
-    popUp.style.display="none";
+      if(blockLeft<offset+distance) {
+        document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote}`;
+        block.style.animationPlayState="paused";
+        popUp.style.display="block";    // pop-up message appears
+        popUp.style.marginLeft=blockLeft+"px";
+        // game over if user does not answer in 10 secs
+        myTimer = setTimeout(function() {
+          ingame=false;
+          document.getElementById("gameover").innerHTML = "GAME OVER";
+        }, 10000)
+        if(isCorrectNote) {
+          block.style.display = "none"; // make block & text disappear
+          clearTimeout(myTimer);  // NOT WORKING
+          isCorrectNote=false;
+          $("#block").finish();
+          correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly chooses note to play
+          counter++;  // increase score when block destroyed
+        }
+        document.getElementById("scoreSpan").innerHTML = counter;
 
-    document.getElementById("startgame").style.visibility = "hidden";
-    document.getElementById("gameover").innerHTML="";
-    if(blockLeft<offset+distance) {
-      document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote}`
-      block.style.animationPlayState="paused";
-      popUp.style.display="block";    // pop-up message appears
-      popUp.style.marginLeft=blockLeft+"px";
-
-      // game over if user does not answer in 10 sec
-      myTimer = setTimeout(function() {
-        ingame=false;
-        document.getElementById("gameover").innerHTML = "GAME OVER";
-      }, 10000)
-      
-      if(isCorrectNote) {
-        block.style.display = "none"; // make block & text disappear
-        clearTimeout(myTimer);
-        isCorrectNote=false;
-        $("#block").finish();
-        correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly chooses note to play
-        counter++;  // increase score when block destroyed
       }
-      document.getElementById("scoreSpan").innerHTML = counter;
+    }else {
+      block.style.animation = "none";
+      character.style.left="0px";
+      document.getElementById("startgame").style.visibility = "visible";
+      // alert("Game Over. score: "+Math.floor(counter/100));
+      counter=0;
+      character.classList.remove("animate");
     }
-  }
-  else {
-    block.style.animation = "none";
-    character.style.left="0px";
-    document.getElementById("startgame").style.visibility = "visible";
-    // alert("Game Over. score: "+Math.floor(counter/100));
-    counter=0;
-    character.classList.remove("animate");
-  }
 }, 1000/60);
 
 function startgame() {
-    //reset parameters
-    offset=0;
-    character.style.left="0px";
     ingame = true;
     block.style.animation = "block 2s infinite linear";
+    concrete.innerHTML = "";
+
     character.classList.add("animate"); 
     document.getElementById("gameover").innerHTML = "";
 }
