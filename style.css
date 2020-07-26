@@ -4,6 +4,7 @@
   --block-width: 50px;
   --block-height: 50px;
 }
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=VT323&display=swap');
 
 *{
   padding:0;
@@ -18,6 +19,8 @@
   border: 1px solid #006d77;
   background-color: #006d77;
   margin: auto;
+  margin-top: 50px;
+  padding: 10px;
 }
 
 /* ANIMATION FOR BLOCK */
@@ -61,18 +64,42 @@ p {
 #startgame {
   position: relative;
   font-size: 20px;
+  font-family: 'Architects Daughter', cursive;
   height: 50px;
   width: 80px;
   border-radius: 8px;
   background-color: #EDF6F9;
   bottom: 100px;
-  align: center;
+}
+
+.score {
+  font-family: 'Architects Daughter', cursive;
+  font: 100px;
 }
 
 #startgame:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.3s;
   cursor: pointer;
+}
+
+/* POP-UP MESSAGE */
+#notes-to-play {
+  position: relative;
+  background-color: #EDF6F9;
+  display: none;
+  width: 100px;
+  font-family: 'Architects Daughter', cursive;
+}
+
+#gameover {
+  position: relative;
+  color: #EDF6F9;
+  font-size: 150px;
+  text-align: center;
+  bottom: 125px;
+  font-family: 'VT323', monospace;
+  bottom: 30%;
 }
 
 html {
