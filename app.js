@@ -121,6 +121,7 @@ var checkDead = setInterval(function() {
         // game over if user does not answer in 10 secs
         var myTimer = setTimeout(function() {
             ingame=false;
+            document.getElementById("gameover").innerHTML = "GAME OVER";
         }, 10000)
         console.log("after set: "+ myTimer);
 
@@ -141,7 +142,6 @@ var checkDead = setInterval(function() {
     block.style.animation = "none";
     character.style.left="0px";
     document.getElementById("startgame").style.visibility = "visible";
-    document.getElementById("gameover").innerHTML = "GAME OVER";
     // alert("Game Over. score: "+Math.floor(counter/100));
     counter=0;
     character.classList.remove("animate");
