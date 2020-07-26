@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=VT323&display=swap');
 :root {
   --game-canvas-width: 800px;
   --game-canvas-height: 200px;
   --block-width: 50px;
   --block-height: 50px;
 }
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=VT323&display=swap');
-
 *{
   padding:0;
   margin:0;
@@ -18,9 +17,7 @@
   height: var(--game-canvas-height);
   border: 1px solid #006d77;
   background-color: #006d77;
-  margin: auto;
-  margin-top: 50px;
-  padding: 10px;
+  margin: 50px 100px 0px 250px;
 }
 
 /* ANIMATION FOR BLOCK */
@@ -99,9 +96,8 @@ p {
   color: #EDF6F9;
   font-size: 150px;
   text-align: center;
-  bottom: 125px;
+  bottom: 115px;
   font-family: 'VT323', monospace;
-  bottom: 30%;
 }
 
 html {
