@@ -42,7 +42,8 @@ Application.prototype.start = function() {
     }
     isCorrectNote = (mynote == correctNote);
   }
-  swal("Let's Play Breaking Notes!").then(function() {
+  swal("You're at a concert (with your instrument of choice, of course) when suddenly, it starts pouring concrete! By some miracle, there's no concrete on you. Alas, everyone else is stuck, including the musicians. But, the show must go on! To save the musicians, play notes to control your movements, all while playing the notes on each musician to break them out of their predicament. Be careful, though--if you wait too long, the concrete will harden and the musician will be trapped forever :(")
+  .then(function() {
     self.tuner.init()
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount)
   })
