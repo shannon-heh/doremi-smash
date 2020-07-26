@@ -123,6 +123,7 @@ var checkDead = setInterval(function() {
       //     ingame = false;
       // } else
       document.getElementById("startgame").style.visibility = "hidden";
+      document.getElementById("gameover").innerHTML="";
       if(blockLeft<offset+distance) {
           block.style.animationPlayState="paused";
           popUp.style.display="block";    // pop-up message appears
@@ -136,7 +137,7 @@ var checkDead = setInterval(function() {
             else {
               ingame=false;
               document.getElementById("gameover").innerHTML = "GAME OVER";
-              // setTimeout(() => {  document.getElementById("gameover").innerHTML=""; }, 2000);
+              document.getElementById("startgame").style.visibility = "visible";
             }
           }, 10000)
       }
