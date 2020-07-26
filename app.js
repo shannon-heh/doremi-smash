@@ -19,16 +19,23 @@ Application.prototype.start = function() {
         self.lastNote = note.name;
         mynote = note.name;
       }
-      if(mynote =='C') {
+      if(mynote =='C' && self.lastNote != 'D') {
         movL();
       }
-      else if(mynote =='E') {
+      else if(mynote =='E' && self.lastNote != 'D') {
         movR();
       }
       if(mynote == 'D'){
         jump();
-      }}
+      }
+      if(mynote == 'C' && self.lastNote == 'D'){
+        //jumpL();
+      }
+      if(mynote == 'E' && self.lastNote == 'D'){
+        //jumpR();
+      }
     }
+  }
   swal('Welcome online tuner!').then(function() {
     self.tuner.init()
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount)
@@ -85,48 +92,62 @@ function movR(){
         if(offset>700) {
             offset=700;
             console.log(offset);
-        }
+  }
 }
-var offset=0;
+function jumpL(){
+  character.style.left = offset+'px';
+  
+  offset += 5;
+  characterWidth = window.getComputedStyle(character).getPropertyValue("width");
+  console.log(characterWidth);
+  if(offset>700) {
+      offset=700;
+      console.log(offset);
+  }
+}
+var offset=0;           // for positioning of character
+var distance=50;        // distance between blocks when message appears
+var endGame = false;    // determines whether to end game
+
 var checkDead = setInterval(function() {
 
-    let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
-    let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-    let popUp = document.getElementById("notes-to-play");
-    
-    if(ingame) {
-        if(endGame){ // game over
-            block.style.animation = "none";
-            character.style.left="0px";
-            alert("Game Over. score: "+Math.floor(counter/100));
-            counter=0;
-            character.classList.remove("animate");
-            ingame = false;
-        } 
-        else if(blockLeft<offset+distance) {
-            rightPressed=false;
-            block.style.animationPlayState="paused";
-            popUp.style.display="block";    // pop-up message appears
-            popUp.style.marginLeft=blockLeft+"px";
+  let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
+  let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+  let popUp = document.getElementById("notes-to-play");
+  
+  if(ingame) {
+      if(endGame){ // game over
+          block.style.animation = "none";
+          character.style.left="0px";
+          alert("Game Over. score: "+Math.floor(counter/100));
+          counter=0;
+          character.classList.remove("animate");
+          ingame = false;
+      } 
+      else if(blockLeft<offset+distance) {
+          rightPressed=false;
+          block.style.animationPlayState="paused";
+          popUp.style.display="block";    // pop-up message appears
+          popUp.style.marginLeft=blockLeft+"px";
 
-            // game over if user does not answer in 10 secs
-            setTimeout(() => {
-                endGame=true
-            }, 3000)
+          // game over if user does not answer in 10 secs
+          setTimeout(() => {
+              endGame=true
+          }, 3000)
 
-            // if (notes correct) --> block disappears, set rightPressed=true again
-            // if (notes wrong) --> endGame = true;
-        }
-        else{
-            counter++; // MOVE THIS: increment if they get past a block
-            document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
-        }
-    }
-    else {
-      block.style.animation = "none";
-      popUp.style.display="none"; 
-      concrete.innerHTML = "Play the right note to break out this musician!";
-    }
+          // if (notes correct) --> block disappears, set rightPressed=true again
+          // if (notes wrong) --> endGame = true;
+      }
+      else{
+          counter++; // MOVE THIS: increment if they get past a block
+          document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
+      }
+  }
+  else {
+    block.style.animation = "none";
+    popUp.style.display="none"; 
+    concrete.innerHTML = "Play the right note to break out this musician!";
+  }
 }, 10);
 
 function startgame() {
