@@ -68,7 +68,7 @@ p {
 
 .score {
   font-family: 'Architects Daughter', cursive;
-  font: 40px;
+  font: 100px;
 }
 
 #startgame:hover {
@@ -84,8 +84,6 @@ p {
   display: none;
   width: 100px;
   font-family: 'Architects Daughter', cursive;
-  left: 50px;
-  top: 50px;
 }
 
 #gameover {
