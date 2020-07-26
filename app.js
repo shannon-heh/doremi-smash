@@ -72,7 +72,7 @@ var character = document.getElementById("character");
 var block = document.getElementById("block");
 var counter=0;
 var ingame = false;
-var concrete = document.getElementById("break-concrete");
+var target = document.getElementById("target-note");
 
 function jump(){
     if(character.classList == "animate"){return}
@@ -111,7 +111,6 @@ function jumpL(){
 }
 var offset=0;           // for positioning of character
 var distance=50;        // distance between blocks when message appears
-var endGame = false;    // determines whether to end game
 
 var checkDead = setInterval(function() {
 
@@ -120,15 +119,15 @@ var checkDead = setInterval(function() {
   let popUp = document.getElementById("notes-to-play");
   
   if(ingame) {
-      if(endGame){ // game over
-          block.style.animation = "none";
-          character.style.left="0px";
-          alert("Game Over. score: "+Math.floor(counter/100));
-          counter=0;
-          character.classList.remove("animate");
-          ingame = false;
-      } 
-      else if(blockLeft<offset+distance) {
+      // if(endGame){ // game over
+      //     block.style.animation = "none";
+      //     character.style.left="0px";
+      //     // alert("Game Over. score: "+Math.floor(counter/100));
+      //     counter=0;
+      //     character.classList.remove("animate");
+      //     ingame = false;
+      // } else
+      if(blockLeft<offset+distance) {
           rightPressed=false;
           block.style.animationPlayState="paused";
           popUp.style.display="block";    // pop-up message appears
@@ -140,7 +139,7 @@ var checkDead = setInterval(function() {
               block.style.display = "none"; // make block disappear
             }
             else {
-              endGame=true;
+              ingame=false;
             }
           }, 10000)
       }
@@ -152,6 +151,11 @@ var checkDead = setInterval(function() {
   else {
     block.style.animation = "none";
     popUp.style.display="none"; 
+    character.style.left="0px";
+    document.getElementById("gameover").innerHTML = "Game Over :( Play again?";
+    // alert("Game Over. score: "+Math.floor(counter/100));
+    counter=0;
+    character.classList.remove("animate");
   }
 }, 10);
 
@@ -160,8 +164,8 @@ function startgame() {
     offset=0;
     character.style.left="0px";
     ingame = true;
-    endGame = false;
     block.style.animation = "block 2s infinite linear";
-    concrete.innerHTML = "";
+    target.innerHTML = "";
     character.classList.add("animate"); 
+    document.getElementById("gameover").innerHTML = "";
 }
