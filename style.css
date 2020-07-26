@@ -81,10 +81,7 @@ p {
   font-family: 'Architects Daughter', cursive;
   font-size: 1.5em;
   text-align: left;
-  /* margin-left: 300px; */
-}
-#scoreSpan {
-  margin-left: 0px;
+  left: 30%;
 }
 
 #startgame:hover {

@@ -124,11 +124,11 @@ var checkDead = setInterval(function() {
           popUp.style.display="block";    // pop-up message appears
           console.log('popUp here');
           popUp.style.marginLeft=blockLeft+"px";
-          // game over if user does not answer in 3 secs
+          // game over if user does not answer in 10 secs
           myTimer = setTimeout(function() {
             ingame=false;
             document.getElementById("gameover").innerHTML = "GAME OVER";
-          }, 3000)
+          }, 12000)
         }
   
         else{
@@ -139,7 +139,7 @@ var checkDead = setInterval(function() {
           correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly pick next note
           counter++;  // increase score when block destroyed
         }
-        document.getElementById("scoreSpan").innerHTML = counter;
+        document.getElementById("score").innerHTML = `Score: ${counter}`;
 
       }
     }else {
@@ -154,7 +154,7 @@ var checkDead = setInterval(function() {
 
 function startgame() {
     ingame = true;
-    block.style.animation = "block 5s infinite linear";
+    block.style.animation = "block 2s infinite linear";
     concrete.innerHTML = "";
 
     character.classList.add("animate"); 
