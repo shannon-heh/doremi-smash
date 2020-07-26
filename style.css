@@ -1,7 +1,7 @@
 *{
   padding:0;
   margin:0;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* GAME CANVAS */
@@ -68,6 +68,13 @@ p {
   cursor: pointer;
 }
 
+/* POP-UP MESSAGE */
+#notes-to-play {
+  background-color: yellow;
+  display: none;
+  width: 100px;
+}
+
 html {
   height: 100%;
 }
@@ -86,16 +93,16 @@ body {
 
 .notes {
   margin: auto;
-  width: 400px;
+  width: 240px;
   position: absolute;
-  top: 50%;
+  bottom: 20%;
   left: 0;
   right: 0;
   text-align: center;
 }
 
 .note {
-  font-size: 90px;
+  font-size: 50px;
   font-weight: bold;
   position: relative;
   display: inline-block;
@@ -144,7 +151,7 @@ body {
 }
 
 .frequency {
-  font-size: 32px;
+  font-size: 20px;
 }
 
 .frequency span {
@@ -156,10 +163,11 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 50%;
-  width: 400px;
-  height: 33%;
+  bottom: 30%;
+  width: 300px;
+  height: 15%;
   margin: 0 auto 5vh auto;
+  overflow: -moz-scrollbars-none;
 }
 
 .meter-pointer {
@@ -171,6 +179,8 @@ body {
   transition: transform 0.5s;
   position: absolute;
   right: 50%;
+    overflow: -moz-scrollbars-none;
+
 }
 
 .meter-dot {
@@ -217,10 +227,4 @@ body {
 
 .swal-button {
   background: #2c3e50;
-}
-
-#notes-to-play {
-  background-color: yellow;
-  display: none;
-  width: 100px;
 }

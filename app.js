@@ -36,7 +36,7 @@ Application.prototype.start = function() {
       }
     }
   }
-  swal('Welcome online tuner!').then(function() {
+  swal("Welcome to Our Game!").then(function() {
     self.tuner.init()
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount)
   })
@@ -146,7 +146,6 @@ var checkDead = setInterval(function() {
   else {
     block.style.animation = "none";
     popUp.style.display="none"; 
-    concrete.innerHTML = "Play the right note to break out this musician!";
   }
 }, 10);
 
