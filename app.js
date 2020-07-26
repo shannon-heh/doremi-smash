@@ -9,8 +9,7 @@ const Application = function() {
 }
 var isCorrectNote = false;
 var correctNote = 'A';
-// const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-// var correctNote = notes[Math.floor(Math.random()*notes.length)];
+const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
 Application.prototype.start = function() {
   const self = this
@@ -134,7 +133,7 @@ var checkDead = setInterval(function() {
           clearTimeout(myTimer);  // NOT WORKING
           isCorrectNote=false;
           $("#block").finish();
-          correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly chooses note to play
+          correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly pick next note
           counter++;  // increase score when block destroyed
         }
         document.getElementById("scoreSpan").innerHTML = counter;
