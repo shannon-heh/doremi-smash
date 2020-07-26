@@ -108,8 +108,7 @@ function jumpL(){
 var offset=0;           // for positioning of character
 var distance=50;        // distance between blocks when message appears
 var myTimer;
-var correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly picks note to play
-// document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote}`;
+var correctNote = notes[Math.floor(Math.random()*notes.length)]; // note to play
 console.log(correctNote);
 
 
@@ -126,7 +125,7 @@ var checkDead = setInterval(function() {
     document.getElementById("startgame").style.visibility = "hidden";
     document.getElementById("gameover").innerHTML="";
     if(blockLeft<offset+distance) {
-      // document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote};`
+      document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote}`
       block.style.animationPlayState="paused";
       popUp.style.display="block";    // pop-up message appears
       popUp.style.marginLeft=blockLeft+"px";
@@ -135,14 +134,14 @@ var checkDead = setInterval(function() {
       myTimer = setTimeout(function() {
         ingame=false;
         document.getElementById("gameover").innerHTML = "GAME OVER";
-      }, 60000)
+      }, 10000)
       
       if(isCorrectNote) {
         block.style.display = "none"; // make block & text disappear
         clearTimeout(myTimer);
         isCorrectNote=false;
         $("#block").finish();
-        // var correctNote = notes[Math.floor(Math.random()*notes.length)];
+        correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly chooses note to play
         counter++;  // increase score when block destroyed
       }
       document.getElementById("scoreSpan").innerHTML = counter;
