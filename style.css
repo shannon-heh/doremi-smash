@@ -89,7 +89,9 @@ p {
   background-color: #EDF6F9;
   display: none;
   width: 100px;
+  height: var(--block-height);
   font-family: 'Architects Daughter', cursive;
+  margin: auto;
 }
 
 #gameover {

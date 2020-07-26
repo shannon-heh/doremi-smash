@@ -72,6 +72,7 @@ const app = new Application()
 app.start()
 var character = document.getElementById("character");
 var block = document.getElementById("block");
+var popUp = document.getElementById("notes-to-play");
 var counter=0;
 var ingame = false;
 
@@ -114,30 +115,32 @@ var checkDead = setInterval(function() {
   let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
   
   if(ingame) {
-      block.style.display="block";
-      block.style.animationPlayState="running";
+    block.style.display="block";
+    block.style.animationPlayState="running";
+    popUp.style.display="none";
 
-      document.getElementById("startgame").style.visibility = "hidden";
-      if(blockLeft<offset+distance) {
-          block.style.animationPlayState="paused";
-
-        // game over if user does not answer in 10 secs
-        var myTimer = setTimeout(function() {
-            ingame=false;
-            document.getElementById("gameover").innerHTML = "GAME OVER";
-        }, 10000)
-        
-        if(isCorrectNote) {
-          block.style.display = "none"; // make block & text disappear
-          console.log("before clear: " + myTimer);
-          isCorrectNote=false;
-          $("#block").finish();
-          counter++;  // increase score when block destroyed
-        }
+    document.getElementById("startgame").style.visibility = "hidden";
+    document.getElementById("gameover").innerHTML="";
+    if(blockLeft<offset+distance) {
+      block.style.animationPlayState="paused";
+      popUp.style.display="block";    // pop-up message appears
+      popUp.style.marginLeft=blockLeft+"px";
+      // game over if user does not answer in 10 secs
+      var myTimer = setTimeout(function() {
+        ingame=false;
+        document.getElementById("gameover").innerHTML = "GAME OVER";
+      }, 10000)
+      
+      if(isCorrectNote) {
+        block.style.display = "none"; // make block & text disappear
+        console.log("before clear: " + myTimer);
+        isCorrectNote=false;
+        $("#block").finish();
+        counter++;  // increase score when block destroyed
       }
-      else{
-          document.getElementById("scoreSpan").innerHTML = counter;
-      }
+    
+      document.getElementById("scoreSpan").innerHTML = counter;
+    }
   }
   else {
     block.style.animation = "none";
