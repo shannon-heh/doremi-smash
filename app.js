@@ -10,6 +10,8 @@ const Application = function() {
 
 var isCorrectNote = false;
 var correctNote = 'A';
+// const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+// var correctNote = notes[Math.floor(Math.random()*notes.length)];
 
 Application.prototype.start = function() {
   const self = this
@@ -97,11 +99,10 @@ function movR(){
 }
 function jumpL(){
   character.style.left = offset+'px';
-  
   offset += 5;
   characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-  if(offset>700) {
-      offset=700;
+  if(offset>750) {
+      offset=750;
   }
 }
 var offset=0;           // for positioning of character
@@ -111,43 +112,39 @@ var checkDead = setInterval(function() {
 
   let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
   let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-  let popUp = document.getElementById("notes-to-play");
   
   if(ingame) {
-      // if(endGame){ // game over
-      //     block.style.animation = "none";
-      //     character.style.left="0px";
-      //     // alert("Game Over. score: "+Math.floor(counter/100));
-      //     counter=0;
-      //     character.classList.remove("animate");
-      //     ingame = false;
-      // } else
-      document.getElementById("startgame").style.visibility = "hidden";
-      document.getElementById("gameover").innerHTML="";
-      if(blockLeft<offset+distance) {
-          block.style.animationPlayState="paused";
-          popUp.style.display="block";    // pop-up message appears
-          popUp.style.marginLeft=blockLeft+"px";
+    block.style.display="block";
+    block.style.animationPlayState="running";
 
-          // game over if user does not answer in 10 secs
-          setTimeout(() => {
-            if(isCorrectNote) {
-              block.style.display = "none"; // make block disappear
-            }
-            else {
-              ingame=false;
-              document.getElementById("gameover").innerHTML = "GAME OVER";
-              document.getElementById("startgame").style.visibility = "visible";
-            }
-          }, 10000)
+    document.getElementById("startgame").style.visibility = "hidden";
+    document.getElementById("gameover").innerHTML="";
+    if(blockLeft<offset+distance) {
+      block.style.animationPlayState="paused";
+      // game over if user does not answer in 10 secs
+      var myTimer = setTimeout(function() {
+        ingame=false;
+        document.getElementById("gameover").innerHTML = "GAME OVER";
+      }, 10000)
+      
+      if(isCorrectNote) {
+        block.style.display = "none"; // make block & text disappear
+        console.log("before clear: " + myTimer);
+        isCorrectNote=false;
+        $("#block").finish();
+        counter++;  // increase score when block destroyed
       }
-      else{
-          document.getElementById("scoreSpan").innerHTML = counter;
+      else {
+        ingame=false;
+        document.getElementById("gameover").innerHTML = "GAME OVER";
+        document.getElementById("startgame").style.visibility = "visible";
       }
+    
+      document.getElementById("scoreSpan").innerHTML = counter;
+    }
   }
   else {
     block.style.animation = "none";
-    popUp.style.display="none"; 
     character.style.left="0px";
     document.getElementById("startgame").style.visibility = "visible";
     // alert("Game Over. score: "+Math.floor(counter/100));

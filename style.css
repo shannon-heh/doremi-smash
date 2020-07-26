@@ -1,3 +1,9 @@
+:root {
+  --game-canvas-width: 800px;
+  --game-canvas-height: 200px;
+  --block-width: 50px;
+  --block-height: 50px;
+}
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=VT323&display=swap');
 
 *{
@@ -8,8 +14,8 @@
 
 /* GAME CANVAS */
 .game {
-  width: 800px; /* game canvas width */
-  height: 200px; /* game canvas height */
+  width: var(--game-canvas-width);
+  height: var(--game-canvas-height);
   border: 1px solid #006d77;
   background-color: #006d77;
   margin: 50px 100px 0px 250px;
@@ -28,11 +34,11 @@
 
 #block {
   background-color: #e29578;
-  width: 50px; /* block width */
-  height: 50px; /* block height */
+  width: var(--block-width); 
+  height: var(--block-height); 
   position: relative;
-  top: 100px; /* block start position = canvas height-block height */
-  left: 800px; /* block start position = canvas width */
+  top: 100px; 
+  left: var(--game-canvas-width); 
   animation: none;
 }
 @keyframes block {
