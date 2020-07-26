@@ -159,7 +159,7 @@ function startgame() {
     offset=0;
     character.style.left="0px";
     ingame = true;
-    block.style.animation = "block 2s infinite linear";
+    block.style.animation = "block 5s infinite linear";
     character.classList.add("animate"); 
     document.getElementById("gameover").innerHTML = "";
 }

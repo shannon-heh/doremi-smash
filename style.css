@@ -227,7 +227,7 @@ body {
   background: #2c3e50;
   border-radius: 50%;
   position: absolute;
-  bottom: -5px;
+  bottom: 0px;
   right: 50%;
   margin-right: -4px;
 }
