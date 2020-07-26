@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=VT323&display=swap');
 :root {
   --game-canvas-width: 800px;
   --game-canvas-height: 200px;
   --block-width: 50px;
   --block-height: 50px;
 }
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=VT323&display=swap');
-
 *{
   padding:0;
   margin:0;
