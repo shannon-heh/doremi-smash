@@ -11,7 +11,10 @@
   margin:0;
   overflow: hidden;
 }
-
+.instructions {
+  font-family: 'Architects Daughter', cursive;
+  padding: 10px;
+}
 /* GAME CANVAS */
 .game {
   width: var(--game-canvas-width);
@@ -19,7 +22,7 @@
   border: 1px solid #006d77;
   background-color: #006d77;
   margin: auto;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   padding: 10px;
 }
 
