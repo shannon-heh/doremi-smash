@@ -138,7 +138,6 @@ var checkDead = setInterval(function() {
         $("#block").finish();
         counter++;  // increase score when block destroyed
       }
-    
       document.getElementById("scoreSpan").innerHTML = counter;
     }
   }
