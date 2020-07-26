@@ -122,15 +122,11 @@ var checkDead = setInterval(function() {
         block.style.animationPlayState="paused";
         popUp.style.display="block";    // pop-up message appears
         popUp.style.marginLeft=blockLeft+"px";
-
-        while(!isCorrectNote) {
-          console.log('hi');
-        // game over if user does not answer in 10 secs
-          myTimer = setTimeout(function() {
-            ingame=false;
-            document.getElementById("gameover").innerHTML = "GAME OVER";
-          }, 10000)
-        }
+        // game over if user does not answer in 3 secs
+        myTimer = setTimeout(function() {
+          ingame=false;
+          document.getElementById("gameover").innerHTML = "GAME OVER";
+        }, 3000)
         if(isCorrectNote) {
           block.style.display = "none"; // make block & text disappear
           clearTimeout(myTimer);  // NOT WORKING
@@ -154,7 +150,7 @@ var checkDead = setInterval(function() {
 
 function startgame() {
     ingame = true;
-    block.style.animation = "block 2s infinite linear";
+    block.style.animation = "block 5s infinite linear";
     concrete.innerHTML = "";
 
     character.classList.add("animate"); 
