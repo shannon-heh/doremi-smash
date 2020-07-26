@@ -151,7 +151,7 @@ var checkDead = setInterval(function() {
 
 function startgame() {
     ingame = true;
-    block.style.animation = "block 2s infinite linear";
+    block.style.animation = "block 5s infinite linear";
     concrete.innerHTML = "";
 
     character.classList.add("animate"); 
