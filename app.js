@@ -10,8 +10,8 @@ const Application = function() {
 
 var isCorrectNote = false;
 var correctNote = 'A';
-const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-var correctNote = notes[Math.floor(Math.random()*notes.length)];
+// const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+// var correctNote = notes[Math.floor(Math.random()*notes.length)];
 
 Application.prototype.start = function() {
   const self = this
@@ -114,6 +114,9 @@ var checkDead = setInterval(function() {
   let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
   
   if(ingame) {
+      block.style.display="block";
+      block.style.animationPlayState="running";
+
       document.getElementById("startgame").style.visibility = "hidden";
       if(blockLeft<offset+distance) {
           block.style.animationPlayState="paused";
@@ -123,12 +126,10 @@ var checkDead = setInterval(function() {
             ingame=false;
             document.getElementById("gameover").innerHTML = "GAME OVER";
         }, 10000)
-        console.log("after set: "+ myTimer);
-
+        
         if(isCorrectNote) {
           block.style.display = "none"; // make block & text disappear
           console.log("before clear: " + myTimer);
-          clearTimeout(myTimer);
           isCorrectNote=false;
           $("#block").finish();
           counter++;  // increase score when block destroyed
