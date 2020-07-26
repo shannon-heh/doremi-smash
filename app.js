@@ -77,24 +77,22 @@ function jump(){
     if(character.classList == "animate"){return}
     character.classList.add("animate");
     setTimeout(function(){
-        character.classList.remove("animate");
+      character.classList.remove("animate");
     },3000);
 }
 function movL(){
   character.style.left = offset+'px';
-        offset -= 5;
-        if(offset<0) {
-            offset=0;
-        }
+  offset -= 5;
+  if(offset<0) {
+      offset=0;
+  }
 }
 function movR(){
   character.style.left = offset+'px';
-        offset += 5;
-        characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-        console.log(characterWidth);
-        if(offset>700) {
-            offset=700;
-            console.log(offset);
+  offset += 5;
+  characterWidth = window.getComputedStyle(character).getPropertyValue("width");
+  if(offset>700) {
+      offset=700;
   }
 }
 function jumpL(){
@@ -102,10 +100,8 @@ function jumpL(){
   
   offset += 5;
   characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-  console.log(characterWidth);
   if(offset>700) {
       offset=700;
-      console.log(offset);
   }
 }
 var offset=0;           // for positioning of character
@@ -128,7 +124,6 @@ var checkDead = setInterval(function() {
       // } else
       document.getElementById("startgame").style.visibility = "hidden";
       if(blockLeft<offset+distance) {
-          rightPressed=false;
           block.style.animationPlayState="paused";
           popUp.style.display="block";    // pop-up message appears
           popUp.style.marginLeft=blockLeft+"px";
@@ -146,8 +141,7 @@ var checkDead = setInterval(function() {
           }, 10000)
       }
       else{
-          counter++; // MOVE THIS: increment if they get past a block
-          document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
+          document.getElementById("scoreSpan").innerHTML = counter;
       }
   }
   else {
