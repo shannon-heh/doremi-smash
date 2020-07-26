@@ -95,7 +95,6 @@ function movR(){
   character.style.left = offset+'px';
         offset += 10;
         characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-        console.log(characterWidth);
         if(offset>700) {
             offset=700;
             console.log(offset);
@@ -123,11 +122,15 @@ var checkDead = setInterval(function() {
         block.style.animationPlayState="paused";
         popUp.style.display="block";    // pop-up message appears
         popUp.style.marginLeft=blockLeft+"px";
+
+        while(!isCorrectNote) {
+          console.log('hi');
         // game over if user does not answer in 10 secs
-        myTimer = setTimeout(function() {
-          ingame=false;
-          document.getElementById("gameover").innerHTML = "GAME OVER";
-        }, 10000)
+          myTimer = setTimeout(function() {
+            ingame=false;
+            document.getElementById("gameover").innerHTML = "GAME OVER";
+          }, 10000)
+        }
         if(isCorrectNote) {
           block.style.display = "none"; // make block & text disappear
           clearTimeout(myTimer);  // NOT WORKING
