@@ -70,9 +70,11 @@ p {
 
 /* POP-UP MESSAGE */
 #notes-to-play {
+  position: relative;
   background-color: #EDF6F9;
   display: none;
   width: 100px;
+  bottom: 30%;
 }
 
 html {

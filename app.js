@@ -78,24 +78,22 @@ function jump(){
     if(character.classList == "animate"){return}
     character.classList.add("animate");
     setTimeout(function(){
-        character.classList.remove("animate");
+      character.classList.remove("animate");
     },3000);
 }
 function movL(){
   character.style.left = offset+'px';
-        offset -= 5;
-        if(offset<0) {
-            offset=0;
-        }
+  offset -= 5;
+  if(offset<0) {
+      offset=0;
+  }
 }
 function movR(){
   character.style.left = offset+'px';
-        offset += 5;
-        characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-        console.log(characterWidth);
-        if(offset>700) {
-            offset=700;
-            console.log(offset);
+  offset += 5;
+  characterWidth = window.getComputedStyle(character).getPropertyValue("width");
+  if(offset>700) {
+      offset=700;
   }
 }
 function jumpL(){
@@ -103,10 +101,8 @@ function jumpL(){
   
   offset += 5;
   characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-  console.log(characterWidth);
   if(offset>700) {
       offset=700;
-      console.log(offset);
   }
 }
 var offset=0;           // for positioning of character
@@ -119,33 +115,31 @@ var checkDead = setInterval(function() {
   let popUp = document.getElementById("notes-to-play");
   
   if(ingame) {
-      // if(endGame){ // game over
-      //     block.style.animation = "none";
-      //     character.style.left="0px";
-      //     // alert("Game Over. score: "+Math.floor(counter/100));
-      //     counter=0;
-      //     character.classList.remove("animate");
-      //     ingame = false;
-      // } else
+      block.style.display="block";
+      block.style.animationPlayState="running";
+
       if(blockLeft<offset+distance) {
-          rightPressed=false;
           block.style.animationPlayState="paused";
           popUp.style.display="block";    // pop-up message appears
           popUp.style.marginLeft=blockLeft+"px";
 
-          // game over if user does not answer in 10 secs
-          setTimeout(() => {
-            if(isCorrectNote) {
-              block.style.display = "none"; // make block disappear
-            }
-            else {
-              ingame=false;
-            }
-          }, 10000)
+        // game over if user does not answer in 10 secs
+        var myTimer = setTimeout(() => {
+            ingame=false;
+        }, 60000)
+        console.log(myTimer);
+
+        if(isCorrectNote) {
+          block.style.display = "none"; // make block disappear
+          clearTimeout(myTimer);
+          isCorrectNote=false;
+          $("#block").finish();
+          console.log('what');
+          counter++;  // increase score when block destroyed
+        }
       }
       else{
-          counter++; // MOVE THIS: increment if they get past a block
-          document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
+          document.getElementById("scoreSpan").innerHTML = counter;
       }
   }
   else {
