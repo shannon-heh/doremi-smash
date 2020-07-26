@@ -10,6 +10,8 @@ const Application = function() {
 
 var isCorrectNote = false;
 var correctNote = 'A';
+const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+var correctNote = notes[Math.floor(Math.random()*notes.length)];
 
 Application.prototype.start = function() {
   const self = this
@@ -72,7 +74,6 @@ var character = document.getElementById("character");
 var block = document.getElementById("block");
 var counter=0;
 var ingame = false;
-var target = document.getElementById("target-note");
 
 function jump(){
     if(character.classList == "animate"){return}
@@ -98,11 +99,10 @@ function movR(){
 }
 function jumpL(){
   character.style.left = offset+'px';
-  
   offset += 5;
   characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-  if(offset>700) {
-      offset=700;
+  if(offset>750) {
+      offset=750;
   }
 }
 var offset=0;           // for positioning of character
@@ -112,7 +112,6 @@ var checkDead = setInterval(function() {
 
   let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
   let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-  let popUp = document.getElementById("notes-to-play");
   
   if(ingame) {
       block.style.display="block";
@@ -120,21 +119,19 @@ var checkDead = setInterval(function() {
 
       if(blockLeft<offset+distance) {
           block.style.animationPlayState="paused";
-          popUp.style.display="block";    // pop-up message appears
-          popUp.style.marginLeft=blockLeft+"px";
 
         // game over if user does not answer in 10 secs
-        var myTimer = setTimeout(() => {
+        var myTimer = setTimeout(function() {
             ingame=false;
-        }, 60000)
-        console.log(myTimer);
+        }, 10000)
+        console.log("after set: "+ myTimer);
 
         if(isCorrectNote) {
-          block.style.display = "none"; // make block disappear
+          block.style.display = "none"; // make block & text disappear
+          console.log("before clear: " + myTimer);
           clearTimeout(myTimer);
           isCorrectNote=false;
           $("#block").finish();
-          console.log('what');
           counter++;  // increase score when block destroyed
         }
       }
@@ -144,7 +141,6 @@ var checkDead = setInterval(function() {
   }
   else {
     block.style.animation = "none";
-    popUp.style.display="none"; 
     character.style.left="0px";
     document.getElementById("gameover").innerHTML = "Game Over :( Play again?";
     // alert("Game Over. score: "+Math.floor(counter/100));

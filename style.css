@@ -1,3 +1,10 @@
+:root {
+  --game-canvas-width: 800px;
+  --game-canvas-height: 200px;
+  --block-width: 50px;
+  --block-height: 50px;
+}
+
 *{
   padding:0;
   margin:0;
@@ -6,8 +13,8 @@
 
 /* GAME CANVAS */
 .game {
-  width: 800px; /* game canvas width */
-  height: 200px; /* game canvas height */
+  width: var(--game-canvas-width);
+  height: var(--game-canvas-height);
   border: 1px solid #006d77;
   background-color: #006d77;
   margin: auto;
@@ -26,11 +33,11 @@
 
 #block {
   background-color: #e29578;
-  width: 50px; /* block width */
-  height: 50px; /* block height */
+  width: var(--block-width); 
+  height: var(--block-height); 
   position: relative;
-  top: 100px; /* block start position = canvas height-block height */
-  left: 800px; /* block start position = canvas width */
+  top: 100px; 
+  left: var(--game-canvas-width); 
   animation: none;
 }
 @keyframes block {
@@ -66,15 +73,6 @@ p {
   transform: scale(1.1);
   transition: ease-in-out 0.3s;
   cursor: pointer;
-}
-
-/* POP-UP MESSAGE */
-#notes-to-play {
-  position: relative;
-  background-color: #EDF6F9;
-  display: none;
-  width: 100px;
-  bottom: 30%;
 }
 
 html {
