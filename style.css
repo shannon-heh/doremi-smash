@@ -5,6 +5,7 @@
   --block-width: 50px;
   --block-height: 50px;
 }
+
 *{
   padding:0;
   margin:0;
@@ -17,7 +18,9 @@
   height: var(--game-canvas-height);
   border: 1px solid #006d77;
   background-color: #006d77;
-  margin: 50px 100px 0px 250px;
+  margin: auto;
+  margin-top: 50px;
+  padding: 10px;
 }
 
 /* ANIMATION FOR BLOCK */
@@ -96,8 +99,9 @@ p {
   color: #EDF6F9;
   font-size: 150px;
   text-align: center;
-  bottom: 115px;
+  bottom: 125px;
   font-family: 'VT323', monospace;
+  bottom: 30%;
 }
 
 html {
