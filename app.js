@@ -7,7 +7,6 @@ const Application = function() {
   this.frequencyBars = new FrequencyBars('.frequency-bars')
   this.update({ name: 'A', frequency: 440, octave: 4, value: 69, cents: 0 })
 }
-
 var isCorrectNote = false;
 var correctNote = 'A';
 // const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
@@ -83,83 +82,74 @@ function jump(){
     if(character.classList == "animate"){return}
     character.classList.add("animate");
     setTimeout(function(){
-      character.classList.remove("animate");
-    },3000);
+        character.classList.remove("animate");
+    },300);
 }
 function movL(){
   character.style.left = offset+'px';
-  offset -= 5;
-  if(offset<0) {
-      offset=0;
-  }
+        offset -= 10;
+        if(offset<0) {
+            offset=0;
+        }
 }
 function movR(){
   character.style.left = offset+'px';
-  offset += 5;
-  characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-  if(offset>700) {
-      offset=700;
-  }
-}
-function jumpL(){
-  character.style.left = offset+'px';
-  offset += 5;
-  characterWidth = window.getComputedStyle(character).getPropertyValue("width");
-  if(offset>750) {
-      offset=750;
-  }
+        offset += 10;
+        characterWidth = window.getComputedStyle(character).getPropertyValue("width");
+        console.log(characterWidth);
+        if(offset>700) {
+            offset=700;
+            console.log(offset);
+        }
 }
 var offset=0;           // for positioning of character
 var distance=50;        // distance between blocks when message appears
 
 var checkDead = setInterval(function() {
+    // console.log(window.getComputedStyle(character));
+    let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
+    let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+    
+    if(ingame) {
+      block.style.display="block";
+      block.style.animationPlayState="running";
+      popUp.style.display="none";
+      document.getElementById("startgame").style.visibility = "hidden";
+      document.getElementById("gameover").innerHTML="";
+      if(blockLeft<offset+distance) {
+        block.style.animationPlayState="paused";
+        popUp.style.display="block";    // pop-up message appears
+        popUp.style.marginLeft=blockLeft+"px";
+        // game over if user does not answer in 10 secs
+        var myTimer = setTimeout(function() {
+          ingame=false;
+          document.getElementById("gameover").innerHTML = "GAME OVER";
+        }, 10000)
+        if(isCorrectNote) {
+          block.style.display = "none"; // make block & text disappear
+          console.log("before clear: " + myTimer);
+          isCorrectNote=false;
+          $("#block").finish();
+          counter++;  // increase score when block destroyed
+        }
+        document.getElementById("scoreSpan").innerHTML = counter;
 
-  let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top")); 
-  let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-  
-  if(ingame) {
-    block.style.display="block";
-    block.style.animationPlayState="running";
-    popUp.style.display="none";
-
-    document.getElementById("startgame").style.visibility = "hidden";
-    document.getElementById("gameover").innerHTML="";
-    if(blockLeft<offset+distance) {
-      block.style.animationPlayState="paused";
-      popUp.style.display="block";    // pop-up message appears
-      popUp.style.marginLeft=blockLeft+"px";
-      // game over if user does not answer in 3 secs
-      var myTimer = setTimeout(function() {
-        ingame=false;
-        document.getElementById("gameover").innerHTML = "GAME OVER";
-      }, 3000)
-      
-      if(isCorrectNote) {
-        block.style.display = "none"; // make block & text disappear
-        console.log("before clear: " + myTimer);
-        isCorrectNote=false;
-        $("#block").finish();
-        counter++;  // increase score when block destroyed
       }
-      document.getElementById("scoreSpan").innerHTML = counter;
+    }else {
+      block.style.animation = "none";
+      character.style.left="0px";
+      document.getElementById("startgame").style.visibility = "visible";
+      // alert("Game Over. score: "+Math.floor(counter/100));
+      counter=0;
+      character.classList.remove("animate");
     }
-  }
-  else {
-    block.style.animation = "none";
-    character.style.left="0px";
-    document.getElementById("startgame").style.visibility = "visible";
-    // alert("Game Over. score: "+Math.floor(counter/100));
-    counter=0;
-    character.classList.remove("animate");
-  }
 }, 10);
 
 function startgame() {
-    //reset parameters
-    offset=0;
-    character.style.left="0px";
     ingame = true;
-    block.style.animation = "block 5s infinite linear";
+    block.style.animation = "block 2s infinite linear";
+    concrete.innerHTML = "";
+
     character.classList.add("animate"); 
     document.getElementById("gameover").innerHTML = "";
 }
