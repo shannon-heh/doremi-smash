@@ -118,18 +118,22 @@ var checkDead = setInterval(function() {
       document.getElementById("gameover").innerHTML="";
 
       if(blockLeft<offset+distance) {
-        document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote}`;
-        block.style.animationPlayState="paused";
-        popUp.style.display="block";    // pop-up message appears
-        popUp.style.marginLeft=blockLeft+"px";
-        // game over if user does not answer in 3 secs
-        myTimer = setTimeout(function() {
-          ingame=false;
-          document.getElementById("gameover").innerHTML = "GAME OVER";
-        }, 3000)
-        if(isCorrectNote) {
+        if(!isCorrectNote) {
+          document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote}`;
+          block.style.animationPlayState="paused";
+          popUp.style.display="block";    // pop-up message appears
+          console.log('popUp here');
+          popUp.style.marginLeft=blockLeft+"px";
+          // game over if user does not answer in 3 secs
+          myTimer = setTimeout(function() {
+            ingame=false;
+            document.getElementById("gameover").innerHTML = "GAME OVER";
+          }, 3000)
+        }
+  
+        else{
           block.style.display = "none"; // make block & text disappear
-          clearTimeout(myTimer);  // NOT WORKING
+          // clearTimeout(myTimer);  // NOT WORKING
           isCorrectNote=false;
           $("#block").finish();
           correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly pick next note
