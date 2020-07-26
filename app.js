@@ -40,7 +40,7 @@ Application.prototype.start = function() {
     }
     isCorrectNote = (mynote == correctNote);
   }
-  swal("Welcome to Our Game!").then(function() {
+  swal("Let's Play Breaking Notes!").then(function() {
     self.tuner.init()
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount)
   })
@@ -72,7 +72,6 @@ var character = document.getElementById("character");
 var block = document.getElementById("block");
 var counter=0;
 var ingame = false;
-var target = document.getElementById("target-note");
 
 function jump(){
     if(character.classList == "animate"){return}
@@ -127,6 +126,7 @@ var checkDead = setInterval(function() {
       //     character.classList.remove("animate");
       //     ingame = false;
       // } else
+      document.getElementById("startgame").style.visibility = "hidden";
       if(blockLeft<offset+distance) {
           rightPressed=false;
           block.style.animationPlayState="paused";
@@ -140,6 +140,8 @@ var checkDead = setInterval(function() {
             }
             else {
               ingame=false;
+              document.getElementById("gameover").innerHTML = "GAME OVER";
+              // setTimeout(() => {  document.getElementById("gameover").innerHTML=""; }, 2000);
             }
           }, 10000)
       }
@@ -152,7 +154,7 @@ var checkDead = setInterval(function() {
     block.style.animation = "none";
     popUp.style.display="none"; 
     character.style.left="0px";
-    document.getElementById("gameover").innerHTML = "Game Over :( Play again?";
+    document.getElementById("startgame").style.visibility = "visible";
     // alert("Game Over. score: "+Math.floor(counter/100));
     counter=0;
     character.classList.remove("animate");
@@ -165,7 +167,6 @@ function startgame() {
     character.style.left="0px";
     ingame = true;
     block.style.animation = "block 2s infinite linear";
-    target.innerHTML = "";
     character.classList.add("animate"); 
     document.getElementById("gameover").innerHTML = "";
 }
