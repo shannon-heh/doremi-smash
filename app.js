@@ -42,7 +42,7 @@ Application.prototype.start = function() {
     }
     isCorrectNote = (mynote == correctNote);
   }
-  swal({title: "Welcome to breaking notes!",
+  swal({title: "Welcome to BREAKING NOTES",
   text: "You're at a concert (with your voice or instrument of choice, of course) when suddenly, it starts pouring concrete! By some miracle, there's no concrete on you. Alas, everyone else is stuck, including the musicians. But, the show must go on!\n\n To save the musicians, use your voice or instrument to play notes to control your movements, all while playing the notes on each musician to break them out of the concrete. Be careful, though--if you wait too long, the concrete will harden and the musician will be trapped forever!",
   button: "Let's Play!"})
   .then(function() {
@@ -128,11 +128,11 @@ var checkDead = setInterval(function() {
       block.style.animationPlayState="paused";
       popUp.style.display="block";    // pop-up message appears
       popUp.style.marginLeft=blockLeft+"px";
-      // game over if user does not answer in 10 secs
+      // game over if user does not answer in 3 secs
       var myTimer = setTimeout(function() {
         ingame=false;
         document.getElementById("gameover").innerHTML = "GAME OVER";
-      }, 10000)
+      }, 3000)
       
       if(isCorrectNote) {
         block.style.display = "none"; // make block & text disappear
