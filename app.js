@@ -9,9 +9,7 @@ const Application = function() {
 }
 
 var isCorrectNote = false;
-var correctNote = 'A';
-// const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-// var correctNote = notes[Math.floor(Math.random()*notes.length)];
+const notes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
 Application.prototype.start = function() {
   const self = this
@@ -109,6 +107,11 @@ function jumpL(){
 }
 var offset=0;           // for positioning of character
 var distance=50;        // distance between blocks when message appears
+var myTimer;
+var correctNote = notes[Math.floor(Math.random()*notes.length)]; // randomly picks note to play
+// document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote}`;
+console.log(correctNote);
+
 
 var checkDead = setInterval(function() {
 
@@ -123,20 +126,23 @@ var checkDead = setInterval(function() {
     document.getElementById("startgame").style.visibility = "hidden";
     document.getElementById("gameover").innerHTML="";
     if(blockLeft<offset+distance) {
+      // document.getElementById("notes-to-play").innerHTML=`Play this note: ${correctNote};`
       block.style.animationPlayState="paused";
       popUp.style.display="block";    // pop-up message appears
       popUp.style.marginLeft=blockLeft+"px";
-      // game over if user does not answer in 10 secs
-      var myTimer = setTimeout(function() {
+
+      // game over if user does not answer in 10 sec
+      myTimer = setTimeout(function() {
         ingame=false;
         document.getElementById("gameover").innerHTML = "GAME OVER";
-      }, 10000)
+      }, 60000)
       
       if(isCorrectNote) {
         block.style.display = "none"; // make block & text disappear
-        console.log("before clear: " + myTimer);
+        clearTimeout(myTimer);
         isCorrectNote=false;
         $("#block").finish();
+        // var correctNote = notes[Math.floor(Math.random()*notes.length)];
         counter++;  // increase score when block destroyed
       }
       document.getElementById("scoreSpan").innerHTML = counter;
@@ -150,7 +156,7 @@ var checkDead = setInterval(function() {
     counter=0;
     character.classList.remove("animate");
   }
-}, 10);
+}, 1000/60);
 
 function startgame() {
     //reset parameters
