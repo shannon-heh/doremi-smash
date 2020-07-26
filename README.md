@@ -1,4 +1,4 @@
-# BREAKING NOTES
+# doremiSMASH
 
 _Our submission to HobbyHacks 2020 under the game and music categories_
 
