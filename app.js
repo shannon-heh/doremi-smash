@@ -8,6 +8,9 @@ const Application = function() {
   this.update({ name: 'A', frequency: 440, octave: 4, value: 69, cents: 0 })
 }
 
+var isCorrectNote = false;
+var correctNote = 'A';
+
 Application.prototype.start = function() {
   const self = this
   this.tuner.onNoteDetected = function(note) {
@@ -35,6 +38,7 @@ Application.prototype.start = function() {
         //jumpR();
       }
     }
+    isCorrectNote = (mynote == correctNote);
   }
   swal("Welcome to Our Game!").then(function() {
     self.tuner.init()
@@ -75,7 +79,7 @@ function jump(){
     character.classList.add("animate");
     setTimeout(function(){
         character.classList.remove("animate");
-    },300);
+    },3000);
 }
 function movL(){
   character.style.left = offset+'px';
@@ -132,11 +136,13 @@ var checkDead = setInterval(function() {
 
           // game over if user does not answer in 10 secs
           setTimeout(() => {
-              endGame=true
-          }, 3000)
-
-          // if (notes correct) --> block disappears, set rightPressed=true again
-          // if (notes wrong) --> endGame = true;
+            if(isCorrectNote) {
+              block.style.display = "none"; // make block disappear
+            }
+            else {
+              endGame=true;
+            }
+          }, 10000)
       }
       else{
           counter++; // MOVE THIS: increment if they get past a block
