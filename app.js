@@ -124,7 +124,7 @@ var checkDead = setInterval(function() {
           popUp.style.display="block";    // pop-up message appears
           console.log('popUp here');
           popUp.style.marginLeft=blockLeft+"px";
-          // game over if user does not answer in 10 secs
+          // game over if user does not answer in 12 secs
           myTimer = setTimeout(function() {
             ingame=false;
             document.getElementById("gameover").innerHTML = "GAME OVER";
@@ -154,7 +154,7 @@ var checkDead = setInterval(function() {
 
 function startgame() {
     ingame = true;
-    block.style.animation = "block 2s infinite linear";
+    block.style.animation = "block 5s infinite linear";
     concrete.innerHTML = "";
 
     character.classList.add("animate"); 
