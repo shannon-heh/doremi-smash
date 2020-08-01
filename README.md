@@ -1,4 +1,5 @@
 # doremi SMASH!
+Developers: Shannon Heh, Claire Chang, Janet Zhang
 
 _Our submission to HobbyHacks 2020 that won_ ***Best Music Hack!!***
 
